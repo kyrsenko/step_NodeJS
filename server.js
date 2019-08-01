@@ -28,7 +28,7 @@ app.get('/',(req,res) => {
             useFindAndModify: false
         })
         app.listen(config.PORT, () => {
-            console.log(`Connected at port ${config.PORT}`);
+            console.log(`Connected on port ${config.PORT}`);
         })
     } catch (error) {
         console.log(error);
