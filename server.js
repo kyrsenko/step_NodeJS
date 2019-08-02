@@ -15,7 +15,7 @@ app.use(express.urlencoded({
 app.use(express.static(path.join(__dirname, 'static')))
 app.use(expressLayouts)
 
-app.get('/',(req,res) => {
+app.get('/', (req, res) => {
     res.render('index', {
         pageTitle: 'Main page'
     })
