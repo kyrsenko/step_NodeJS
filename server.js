@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const path = require('path')
 
 const config = require('./config.js')
+const indexRoutes = require('./routes/index')
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -14,12 +15,7 @@ app.use(express.urlencoded({
 }))
 app.use(express.static(path.join(__dirname, 'static')))
 app.use(expressLayouts)
-
-app.get('/', (req, res) => {
-    res.render('index', {
-        pageTitle: 'Main page'
-    })
-});
+app.use(indexRoutes);
 
 (async function start() {
     try {
