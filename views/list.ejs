@@ -4,11 +4,13 @@
         <div class="row">
                 <div class="col-md-10 rounded border border-dark  bg-white d-flex flex-column p-2 mx-auto mb-4" id='list-view-wraper'>
                     <button type="button" class="delete-list-btn btn align-self-end field-delete d-block p-2 position-absolute" data-id="<%= list._id%>"></button>
-                <ol class="list-group list-group-flush px-4 py-1" id="list">
-                        <% list.text.forEach((item, index) => {%>
-                            <li class="list-group-item border-0 px-2 py-0 pl-4">
-                                <input type="checkbox" class="form-check-input" id="<%= index%>">
-                                <label class="list-changing-label form-check-label" for="<%= index%>"><%= item%></label>
+                    <%if(list.title){%>
+                        <h3 class="card-title text-break text-center mt-1"><%= list.title%></h3>
+                        <%}%>
+                    <ol class="list-group list-group-flush px-4 py-1" id="list">
+                        <% list.text.forEach((item) => {%>
+                            <li class="list-group-item border-0 px-2 py-0 pl-4 text-break dot d-flex <%= item.status%>" data-status=<%= item.status%>>
+                                <span class="list-changing-span"><%= item.text%></span>
                             </li>
                         <%})%>
                 </ol>

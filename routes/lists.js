@@ -29,8 +29,10 @@ router.get('/lists/:id', async (req, res)=>{
 router.post('/api/lists', async (req, res)=>{
     try {
         const list = await new TODO({
+            title: req.body.title,
             text: req.body.text
         })
+        console.log(list);
 
         await list.save()
 
@@ -64,6 +66,7 @@ router.put('/api/lists/:id', async (req, res)=>{
             _id: req.params.id
          },
          {
+             title: req.body.title,
              text: req.body.text
          }
          )

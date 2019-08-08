@@ -3,7 +3,10 @@ const {
     model
 } = require('mongoose')
 const schema = new Schema({
-    text: [String]
+    title:String,
+    text: [{text:String,
+        status:String
+    }]
 })
 
 module.exports = model('TODO', schema)

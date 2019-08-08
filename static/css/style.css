@@ -1,6 +1,3 @@
-body{
-    background-color: beige;
-}
 
 .field-delete-btn{
     position: absolute;
@@ -16,18 +13,33 @@ body{
     background-size: cover; 
 }
 
-.list-group-item {
-    display: list-item;
-    counter-reset: none
-}
-
-.view-list-div{
-    min-height: 
-}
-
 .add-field{
     background-image: url(/img/add.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; 
+}
+
+.finished{
+    color: red;
+    order: 2;
+    text-decoration: line-through;
+}
+
+.inprogress{
+    order: 1;
+}
+
+.dot::before{
+    content: "\2022";
+    margin-right: 5px;
+}
+
+.status-check{
+    top: 10px;
+    left: -15px;
+}
+
+.three-dots{
+    order: 3;
 }
