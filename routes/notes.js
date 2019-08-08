@@ -53,9 +53,6 @@ router.delete('/api/notes/:id', async (req, res) => {
 })
 
 router.put('/api/notes/:id', async (req, res) => {
-    console.log(req.body, '============================')
-    console.log(req.params, '============================')
-    // console.log(req.params)
     try {
         await Note.findOneAndUpdate({
             _id: req.params.id,
