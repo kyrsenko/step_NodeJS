@@ -1,1 +1,14 @@
 <h1><%= pageTitle%></h1>
+
+<div class="row">
+    <% notes.forEach(item => {%>
+    <div class="card col-6 border border-primary">
+        <div class="card-body">
+            <!-- <button type="button" class="close todo-delete-btn" aria-label="Close" data-id="<%= item._id%>">x</button> -->
+            <h5 class="card-title"><%= item.title%></h5>
+                <p class="card-text text-truncate"><%= item.text%></p>
+            <a href="#" class="btn btn-primary note-view-btn" data-id="<%= item._id%>">View</a>
+        </div>
+    </div>
+    <% })%>
+</div>

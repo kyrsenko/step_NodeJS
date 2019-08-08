@@ -15,6 +15,7 @@ app.set("layout extractScripts", true)
 app.use(express.urlencoded({
     extended: true
 }))
+app.use(express.json())
 app.use(express.static(path.join(__dirname, 'static')))
 app.use(expressLayouts)
 app.use(indexRoutes)
