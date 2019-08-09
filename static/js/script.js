@@ -3,8 +3,6 @@ console.log('conected');
 
 document.body.addEventListener('click', (e) => {
     const id = e.target.dataset.id
-    console.log('id: ', id)
-    console.log('target: ', e.target)
     if(e.target.classList.contains('note-create-btn')) {
         createNote()
         window.location.href = '/'
