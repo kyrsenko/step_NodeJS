@@ -1,0 +1,20 @@
+
+
+
+        <div class="row position-relative">
+                <button type="button" class="delete-list-btn btn align-self-end field-delete d-block p-2 position-absolute" data-id="<%= list._id%>"></button>
+                <div class="col-12  bg-white d-flex flex-column mx-auto mb-4" id='list-view-wraper'>
+
+                    <%if(list.title){%>
+                        <h3 class="card-title text-break text-center mt-3"><%= list.title%></h3>
+                        <%}%>
+                    <ol class="list-group list-group-flush px-4 py-1" id="list">
+                        <% list.text.forEach((item) => {%>
+                            <li class="list-group-item border-0   text-break dot d-flex <%= item.status%>" data-status=<%= item.status%>>
+                                <span class="list-changing-span"><%= item.text%></span>
+                            </li>
+                        <%})%>
+                </ol>
+                <button type="button" class="edit-list-btn btn btn-warning fixed-bottom py-3 w-100" id="edit-list-btn" data-id="<%= list._id%>">Edit</button>
+                </div>
+        </div>

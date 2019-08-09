@@ -1,16 +1,46 @@
 
-.field-delete-btn{
-    position: absolute;
-    top: 0;
+.delete-list-btn{
+    top: 10px;
     right: 10px;
-    bottom: 0;
+    z-index: 100;
 }
 
 .field-delete{
     background-image: url(/img/close.png);
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 75%; 
+}
+
+.add-field{
+    background-image: url(/img/add.png);
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: cover; 
+}
+
+.finished{
+    color: red;
+    order: 2;
+    text-decoration: line-through;
+}
+
+.inprogress{
+    order: 1;
+}
+
+.dot::before{
+    content: "\2022";
+    margin-right: 5px;
+}
+
+.status-check{
+    top: 10px;
+    left: -15px;
+}
+
+.three-dots{
+    order: 3;
 }
 
 .form-group {
