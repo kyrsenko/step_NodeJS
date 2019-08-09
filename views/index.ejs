@@ -1,24 +1,25 @@
 
     <div class="row">
-<div class="col-md-6">
+<div class="col-12 mx-auto">
 
     <h2 class="text-center">TODO</h2>
-        <div class="row">
+        <!-- <div class="row"> -->
         <% lists.forEach(item =>{%>
-            <div class="col-11 rounded border border-dark  bg-white d-flex flex-column  py-2 mb-1 mx-auto">
+            <div class="col-12 rounded border border-dark  bg-white d-flex flex-column  py-2 mb-1 mx-auto">
                     <!-- <button type="button" class="delete-list-btn btn align-self-end field-delete d-block p-2" data-id="<%= item._id%>"></button> -->
                     <%if(item.title){%>
                     <h3 class="card-title text-truncate text-center"><%= item.title%></h3>
                     <%}%>
-            <ol class="list-group list-group-flush px-4 py-1">
+            <ol class="list-group list-group-flush px-4 py-2">
                 <%item.text.forEach(item => {%>
                     <li class="list-group-item border-0 px-2 py-0 text-break text-truncate dot <%= item.status%>"><%= item.text%></li>
                 <%})%>
             </ol>
-            <button type="button" class="view-list-btn btn btn-primary d-block mt-auto align-s-zlf-center" data-id="<%= item._id%>">view</button>
+            <button type="button" class="view-list-btn btn btn-secondary d-block mt-auto mb-3 w-25 align-self-center" data-id="<%= item._id%>">view</button>
         </div>
             <%})%>
         </div>
-        </div>
+        <!-- </div> -->
     </div>
-    </div>
+    </div>2322
+    33
