@@ -5,6 +5,8 @@ const path = require('path')
 
 const config = require('./config.js')
 const indexRoutes = require('./routes/index')
+const noteRoutes = require('./routes/notes')
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -13,9 +15,11 @@ app.set("layout extractScripts", true)
 app.use(express.urlencoded({
     extended: true
 }))
+app.use(express.json())
 app.use(express.static(path.join(__dirname, 'static')))
 app.use(expressLayouts)
-app.use(indexRoutes);
+app.use(indexRoutes)
+app.use(noteRoutes);
 
 (async function start() {
     try {
