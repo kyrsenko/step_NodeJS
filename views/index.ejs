@@ -1,4 +1,4 @@
-<h2 class="fixed-top text-center text-white"><%= pageTitle%></h2>
+<!-- <h2 class="fixed-top text-center text-white"><%= pageTitle%></h2> -->
 <div class="row mt-2">
     <div class="col-6">
         <h2 class="text-center">Notes</h2>
@@ -6,7 +6,6 @@
     <% notes.forEach(item => {%>
     <div class="card col-11 m-1 border border-primary">
         <div class="card-body">
-            <!-- <button type="button" class="close todo-delete-btn" aria-label="Close" data-id="<%= item._id%>">x</button> -->
             <h5 class="card-title text-center"><%= item.title%></h5>
                 <p class="card-text text-truncate"><%= item.text%></p>
             <a href="#" class="btn btn-primary note-view-btn d-block mt-auto align-s-zlf-center" data-id="<%= item._id%>">View</a>
