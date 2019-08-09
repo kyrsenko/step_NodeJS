@@ -5,7 +5,10 @@ document.body.addEventListener('click', (e) => {
     const id = e.target.dataset.id
     if(e.target.classList.contains('note-create-btn')) {
         createNote()
-        window.location.href = '/'
+        document.body.appendChild(addSpinner())
+        setTimeout(()=>{
+            window.location.href = "/"
+        },500)
     }
     if(e.target.classList.contains('note-view-btn')){
         console.log(id)
@@ -20,7 +23,10 @@ document.body.addEventListener('click', (e) => {
     }
     if (e.target.classList.contains('save-note-btn')) {
         editNote(id)
-        window.location.href = `/notes/${id}`
+        document.body.appendChild(addSpinner())
+        setTimeout(()=>{
+            window.location.href = `/notes/${id}`
+        },500)
     }
 })
 
@@ -89,8 +95,6 @@ async function editNote(id) {
 }
 
  function replaceFieldsNote(id) {
-    // const titleInput = document.createElement('input')
-    // const textTextarea = document.createElement('textarea')
     const cardWrapper = document.querySelector('.card-wrapper')
     const title = document.querySelector('[name="note-title"]')
     const text = document.querySelector('[name="note-text"]')
@@ -109,20 +113,16 @@ async function editNote(id) {
         `
     cardWrapper.parentNode.appendChild(editNoteForm)
     cardWrapper.remove()
-    // titleInput.setAttribute('name', 'note-title')
-    // textTextarea.setAttribute('name', 'note-text')
-    // titleInput.classList = 'col-md-12 mx-auto mt-4 rounded'
-    // textTextarea.classList = 'col-md-12 mx-auto mt-4 rounded'
-    // textTextarea.setAttribute('rows', '12')
+}
 
-    // titleInput.value = title.innerText
-    // textTextarea.value = text.innerText
-    // title.parentNode.replaceChild(titleInput, title)
-    // text.parentNode.replaceChild(textTextarea, text)
-    // const editNoteBtn = document.querySelector('.edit-note-btn')
-    // const saveNoteBtn = document.createElement('button')
-    // saveNoteBtn.setAttribute('data-id', id)
-    // saveNoteBtn.classList = 'btn btn-dark save-note-btn fixed-bottom w-100 py-3'
-    // saveNoteBtn.innerText = 'Save'
-    // editNoteBtn.parentNode.replaceChild(saveNoteBtn, editNoteBtn)
+function addSpinner() {
+    const spinnerWrapper = document.createElement('div')
+    const spinner = `
+    <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+    </div>`
+    spinnerWrapper.classList = `fixed-top fixed-bottom d-flex justify-content-center align-items-center`
+    spinnerWrapper.style.backgroundColor = 'rgba(0,0,0,0.2)'
+    spinnerWrapper.innerHTML = spinner
+    return spinnerWrapper
 }
