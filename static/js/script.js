@@ -1,3 +1,4 @@
+
 console.log('conected')
 
 document.body.addEventListener('click',async (e)=> {
@@ -13,11 +14,20 @@ document.body.addEventListener('click',async (e)=> {
     }
     if(e.target.classList.contains('create-list-btn')){
         createList()
+      document.body.appendChild(addSpinner())
+        setTimeout(()=>{
+            window.location.href = "/"
+        },500)
+    }
+
+    if(e.target.classList.contains('note-create-btn')) {
+        createNote()
         document.body.appendChild(addSpinner())
         setTimeout(()=>{
             window.location.href = "/"
         },500)
     }
+
     if(e.target.classList.contains('view-list-btn')){
         window.location.href = `/lists/${id}`
     }
@@ -46,6 +56,24 @@ document.body.addEventListener('click',async (e)=> {
             e.target.checked = false
         }
     } 
+    if(e.target.classList.contains('note-view-btn')){
+        console.log(id)
+        window.location.href= `/notes/${id}`
+    }
+    if(e.target.classList.contains('note-delete-btn')) {
+        deleteNote(id)
+        window.location.href = '/'
+    }
+    if(e.target.classList.contains('edit-note-btn')) {
+        replaceFieldsNote(id)
+    }
+    if (e.target.classList.contains('save-note-btn')) {
+        editNote(id)
+        document.body.appendChild(addSpinner())
+        setTimeout(()=>{
+            window.location.href = `/notes/${id}`
+        },500)
+    }
 })
 
 function addField(btnType) {
@@ -140,23 +168,86 @@ async function deleteList(id){
             method: "DELETE",
             headers: {
                 "Content-Type":"application/json"
+              },
+            body: JSON.stringify(data)
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function createNote() {
+    try {
+        const title = document.querySelector('[name=note-title]')
+        const text = document.querySelector('[name=note-text]')
+        const data = {
+            title: title.value,
+            text: text.value
+        }
+        console.log(data)
+        await fetch('/api/notes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function deleteNote(id) {
+    try {
+        let data = {
+            id: id
+        }
+        console.log(data)
+       await fetch(`/api/notes/${id}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json"
             },
             body: JSON.stringify(data)
         })
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
 }
+
+async function editNote(id) {
+    try {
+        console.log(id)
+        const title = document.querySelector('[name=note-title]')
+        const text = document.querySelector('[name=note-text]')
+        // console.log(title.innerText)
+        const data = {
+            title: title.value,
+            text: text.value,
+            _id: id
+        }
+        // console.log(data)
+        await fetch(`/api/notes/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(data)
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 function changeFields(id){
 
     const spans = document.querySelectorAll('.list-changing-span')
 
     const listWraper = document.querySelector('#list-view-wraper')
-    // const deleteBtn = document.querySelector('.delete-list-btn')
-    // const newDeleteBtn =`<button type="button" class="delete-list-btn btn align-self-end field-delete d-block p-2 position-absolute" data-id="<%= list._id%>"></button>`
-    // deleteBtn.remove()
-
     
     const addBtn = document.createElement('button')
     addBtn.setAttribute('type', 'button')
@@ -165,7 +256,6 @@ function changeFields(id){
 
     const form = document.createElement('form')
     form.id = "list"
-    // form.innerHTML = `<button type="button" class="delete-list-btn btn align-self-end field-delete d-block p-2 position-absolute" data-id="<%= list._id%>"></button>`
     
     form.classList = 'col-12 mx-auto mt-5'
 
@@ -197,15 +287,7 @@ function changeFields(id){
 
         div.classList = 'input-group-prepend mb-3'
         div.innerHTML = 
-        // `
-        // <input type="checkbox" class="form-check-input status-check position-absolute" ${status}>
-        // <input type="text" class="form-control pr-5" placeholder="enter some text" name="todo-text" value=${item.innerText}>
-        // <button type="button" class="close field-delete-btn" aria-label="Close">
-        //         <span aria-hidden="true" class="field-delete p-2 d-block"></span>
-        // </button>`
-        
-        `
-        <div class="input-group-text">
+          `<div class="input-group-text">
         <input type="checkbox" class="status-check" aria-label="Checkbox for following text input" ${status}>
         </div>
     </div>
@@ -233,11 +315,28 @@ function changeFields(id){
 
     form.parentNode.insertBefore( addBtn, form)
 
-    // listWraper.insertBefore(form, saveBtn)
-    // listWraper.insertBefore(addBtn, form)
 }
 
-
+ function replaceFieldsNote(id) {
+    const cardWrapper = document.querySelector('.card-wrapper')
+    const title = document.querySelector('[name="note-title"]')
+    const text = document.querySelector('[name="note-text"]')
+    const editNoteForm = document.createElement('form')
+    editNoteForm.classList = 'col-11 mx-auto position-reletive'
+    editNoteForm.innerHTML = `<div class="form-group">
+    <button style="top:5px; right:5px;" type="button" class="close note-delete-btn field-delete d-block p-2 position-absolute" aria-label="Close" data-id=${id}></button>
+            <label for="InputTitle">Title</label>
+            <input name="note-title" type="text" class="form-control" id="InputTitle" placeholder="Enter title" value=${title.innerText}>
+        </div>
+        <div class="form-group">
+            <label for="FormControlTextarea">text</label>
+            <textarea name="note-text" class="form-control" id="FormControlTextarea" rows="12">${text.innerText}</textarea>
+        </div>
+        <button type="button" data-id=${id} class="btn btn-dark save-note-btn fixed-bottom w-100 py-3">Save</button>
+        `
+    cardWrapper.parentNode.appendChild(editNoteForm)
+    cardWrapper.remove()
+}
 
 function addSpinner() {
     const spinnerWrapper = document.createElement('div')
@@ -250,4 +349,3 @@ function addSpinner() {
     spinnerWrapper.innerHTML = spinner
     return spinnerWrapper
 }
-

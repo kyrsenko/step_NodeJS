@@ -1,11 +1,4 @@
 
-.field-delete-btn{
-    /* position: absolute;
-    top: 0;
-    right: 10px;
-    bottom: 0; */
-}
-
 .delete-list-btn{
     top: 10px;
     right: 10px;
@@ -48,4 +41,8 @@
 
 .three-dots{
     order: 3;
+}
+
+.form-group {
+    font-size: 17px;
 }

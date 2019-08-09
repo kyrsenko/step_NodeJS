@@ -6,6 +6,9 @@ const path = require('path')
 const config = require('./config.js')
 const indexRoutes = require('./routes/index')
 const listsRoutes = require('./routes/lists')
+const noteRoutes = require('./routes/notes')
+
+
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -19,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'static')))
 app.use(expressLayouts)
 app.use(indexRoutes)
 app.use(listsRoutes);
+app.use(noteRoutes);
+
 
 (async function start() {
     try {

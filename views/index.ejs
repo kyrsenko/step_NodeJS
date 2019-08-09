@@ -21,5 +21,22 @@
         </div>
         <!-- </div> -->
     </div>
-    </div>2322
-    33
+    </div>
+
+<div class="row">
+    <div class="col-12 mx-auto">
+        <h2 class="text-center">Notes</h2>
+    <% notes.forEach(item => {%>
+    <div class="card my-1 border border-dark">
+        <div class="card-body">
+            <% if(item.title){%>
+            <h5 class="card-title text-center"><%= item.title%></h5>
+            <%}%>
+                <p class="card-text text-truncate"><%= item.text%></p>
+            <a href="#" class="btn btn-secondary d-block note-view-btn w-25 mx-auto mt-auto" data-id="<%= item._id%>">View</a>
+        </div>
+    </div>
+    <% })%>
+</div>
+</div>
+
