@@ -89,27 +89,40 @@ async function editNote(id) {
 }
 
  function replaceFieldsNote(id) {
-    const titleInput = document.createElement('input')
-    const textTextarea = document.createElement('textarea')
-    let inputWrap = document.querySelector('.input-wrapper')
-    inputWrap.classList = 'm-3'
-    
+    // const titleInput = document.createElement('input')
+    // const textTextarea = document.createElement('textarea')
+    const cardWrapper = document.querySelector('.card-wrapper')
     const title = document.querySelector('[name="note-title"]')
     const text = document.querySelector('[name="note-text"]')
+    const editNoteForm = document.createElement('form')
+    editNoteForm.classList = 'col-11 mx-auto position-reletive'
+    editNoteForm.innerHTML = `<div class="form-group">
+    <button style="top:5px; right:5px;" type="button" class="close note-delete-btn field-delete d-block p-2 position-absolute" aria-label="Close" data-id=${id}></button>
+            <label for="InputTitle">Title</label>
+            <input name="note-title" type="text" class="form-control" id="InputTitle" placeholder="Enter title" value=${title.innerText}>
+        </div>
+        <div class="form-group">
+            <label for="FormControlTextarea">text</label>
+            <textarea name="note-text" class="form-control" id="FormControlTextarea" rows="12">${text.innerText}</textarea>
+        </div>
+        <button type="button" data-id=${id} class="btn btn-dark save-note-btn fixed-bottom w-100 py-3">Save</button>
+        `
+    cardWrapper.parentNode.appendChild(editNoteForm)
+    cardWrapper.remove()
+    // titleInput.setAttribute('name', 'note-title')
+    // textTextarea.setAttribute('name', 'note-text')
+    // titleInput.classList = 'col-md-12 mx-auto mt-4 rounded'
+    // textTextarea.classList = 'col-md-12 mx-auto mt-4 rounded'
+    // textTextarea.setAttribute('rows', '12')
 
-    titleInput.setAttribute('name', 'note-title')
-    textTextarea.setAttribute('name', 'note-text')
-    titleInput.classList = 'col-md-12 mx-auto mt-4 rounded'
-    textTextarea.classList = 'col-md-12 mx-auto mt-4 rounded'
-
-    titleInput.value = title.innerText
-    textTextarea.value = text.innerText
-    title.parentNode.replaceChild(titleInput, title)
-    text.parentNode.replaceChild(textTextarea, text)
-    const editNoteBtn = document.querySelector('.edit-note-btn')
-    const saveNoteBtn = document.createElement('button')
-    saveNoteBtn.setAttribute('data-id', id)
-    saveNoteBtn.classList = 'btn btn-dark save-note-btn fixed-bottom w-100 py-3'
-    saveNoteBtn.innerText = 'Save'
-    editNoteBtn.parentNode.replaceChild(saveNoteBtn, editNoteBtn)
+    // titleInput.value = title.innerText
+    // textTextarea.value = text.innerText
+    // title.parentNode.replaceChild(titleInput, title)
+    // text.parentNode.replaceChild(textTextarea, text)
+    // const editNoteBtn = document.querySelector('.edit-note-btn')
+    // const saveNoteBtn = document.createElement('button')
+    // saveNoteBtn.setAttribute('data-id', id)
+    // saveNoteBtn.classList = 'btn btn-dark save-note-btn fixed-bottom w-100 py-3'
+    // saveNoteBtn.innerText = 'Save'
+    // editNoteBtn.parentNode.replaceChild(saveNoteBtn, editNoteBtn)
 }
