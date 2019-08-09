@@ -4,8 +4,8 @@ document.body.addEventListener('click',async (e)=> {
     const id = e.target.dataset.id
     console.log(e.target);
     if(e.target.classList.contains('add-field')){
-        const ol = document.getElementById('list')
-        ol.appendChild(addField(e.target.dataset.type))
+        const form = document.getElementById('list')
+        form.appendChild(addField(e.target.dataset.type))
     }
     if(e.target.classList.contains('field-delete')){
         console.log(e.target.parentNode);
@@ -39,34 +39,38 @@ document.body.addEventListener('click',async (e)=> {
     if(e.target.classList.contains('status-check')){
         console.log(e.target);
         if(e.target.checked){
-            e.target.parentNode.setAttribute("data-status", "finished")
+            e.target.parentNode.parentNode.setAttribute("data-status", "finished")
         }
         else{
-            e.target.parentNode.setAttribute("data-status", "inprogress")
+            e.target.parentNode.parentNode.setAttribute("data-status", "inprogress")
             e.target.checked = false
         }
     } 
 })
 
 function addField(btnType) {
-    const li = document.createElement('li')
-    li.classList = 'form-group  position-relative'
-    li.setAttribute('data-status', "inprogress")
+    const div = document.createElement('div')
+    div.classList = 'input-group mb-3'
+    div.setAttribute('data-status', "inprogress")
     if(btnType === "add-field-create"){
-        li.innerHTML = `
-        <input type="text" class="form-control pr-4 " placeholder="enter some text" name="todo-text">
-        <button type="button" class="close field-delete-btn" aria-label="Close">
-                <span aria-hidden="true" class="field-delete p-2 d-block"></span>
-        </button>`
+        div.innerHTML = `
+            <input type="text" class="form-control" placeholder="text" aria-label="Recipient's username" name="todo-text">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary field-delete" type="button"></button>
+          </div>`
     } else{
-    li.innerHTML = `
-        <input type="checkbox" class="form-check-input status-check">
-        <input type="text" class="form-control pr-4" placeholder="enter some text" name="todo-text">
-        <button type="button" class="close field-delete-btn" aria-label="Close">
-                <span aria-hidden="true" class="field-delete p-2 d-block"></span>
-        </button>`
+    div.innerHTML = `
+        <div class="input-group-prepend">
+        <div class="input-group-text">
+        <input type="checkbox" class="status-check" aria-label="Checkbox for following text input">
+        </div>
+    </div>
+    <input type="text" class="form-control" placeholder="text" aria-label="Text input with checkbox" name="todo-text">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary field-delete" type="button"></button>
+        </div>`
     }
-        return li
+        return div
 }
 
 async function createList(){
@@ -147,16 +151,30 @@ async function deleteList(id){
 function changeFields(id){
 
     const spans = document.querySelectorAll('.list-changing-span')
+
     const listWraper = document.querySelector('#list-view-wraper')
+    // const deleteBtn = document.querySelector('.delete-list-btn')
+    // const newDeleteBtn =`<button type="button" class="delete-list-btn btn align-self-end field-delete d-block p-2 position-absolute" data-id="<%= list._id%>"></button>`
+    // deleteBtn.remove()
+
+    
+    const addBtn = document.createElement('button')
+    addBtn.setAttribute('type', 'button')
+    addBtn.setAttribute('data-type', 'add-field-edit')
+    addBtn.classList = 'btn  add-field align-self-start position-absolute p-3 ml-2'
+
     const form = document.createElement('form')
-    form.classList = 'col-md-10 mx-auto mt-4'
-    const ol = document.querySelector('#list')
-    ol.classList = ""
+    form.id = "list"
+    // form.innerHTML = `<button type="button" class="delete-list-btn btn align-self-end field-delete d-block p-2 position-absolute" data-id="<%= list._id%>"></button>`
+    
+    form.classList = 'col-12 mx-auto mt-5'
+
 
     const title = document.querySelector('.card-title')
     const inputTitle = document.createElement('input')
     inputTitle.setAttribute("name", "todo-title")
-    inputTitle.classList = "form-control pr-4 my-4"
+    inputTitle.setAttribute("type", "text")
+    inputTitle.classList = "form-control mb-3"
     inputTitle.placeholder = "title"
     if(title){
     inputTitle.value = title.innerText
@@ -166,22 +184,37 @@ function changeFields(id){
 
     spans.forEach(item =>{
         const li = item.parentNode
+        const div = document.createElement('div')
         
         let status
         if(li.dataset.status === "finished"){
+            div.setAttribute('data-status', "finished")
             status = "checked"
         } else{
+            div.setAttribute('data-status', "inprogress")
             status = ""
         }
 
-        li.classList = 'form-group  position-relative'
-        li.innerHTML = `
-        <input type="checkbox" class="form-check-input status-check position-absolute" ${status}>
-        <input type="text" class="form-control pr-5" placeholder="enter some text" name="todo-text" value=${item.innerText}>
-        <button type="button" class="close field-delete-btn" aria-label="Close">
-                <span aria-hidden="true" class="field-delete p-2 d-block"></span>
-        </button>`
+        div.classList = 'input-group-prepend mb-3'
+        div.innerHTML = 
+        // `
+        // <input type="checkbox" class="form-check-input status-check position-absolute" ${status}>
+        // <input type="text" class="form-control pr-5" placeholder="enter some text" name="todo-text" value=${item.innerText}>
+        // <button type="button" class="close field-delete-btn" aria-label="Close">
+        //         <span aria-hidden="true" class="field-delete p-2 d-block"></span>
+        // </button>`
+        
+        `
+        <div class="input-group-text">
+        <input type="checkbox" class="status-check" aria-label="Checkbox for following text input" ${status}>
+        </div>
+    </div>
+    <input type="text" class="form-control" placeholder="text" aria-label="Text input with checkbox" name="todo-text" value=${item.innerText}>
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary field-delete" type="button"></button>
+        `
 
+        form.appendChild(div)
         item.remove() 
     })
     const editBtn = document.getElementById('edit-list-btn')
@@ -191,17 +224,17 @@ function changeFields(id){
     saveBtn.setAttribute('type', "button")
     saveBtn.classList = 'save-list-btn btn btn-dark fixed-bottom w-100 py-3'
     saveBtn.innerText = 'save'
-    editBtn.parentNode.replaceChild(saveBtn, editBtn)
+    form.appendChild(saveBtn)
+    editBtn.remove()
 
-    const addBtn = document.createElement('button')
-    addBtn.setAttribute('type', 'button')
-    addBtn.setAttribute('data-type', 'add-field-edit')
-    addBtn.classList = 'btn  add-field align-self-start position-absolute p-3'
 
-    form.appendChild(ol)
+    listWraper.parentNode.appendChild(form)
+    listWraper.remove()
 
-    listWraper.insertBefore(form, saveBtn)
-    listWraper.insertBefore(addBtn, form)
+    form.parentNode.insertBefore( addBtn, form)
+
+    // listWraper.insertBefore(form, saveBtn)
+    // listWraper.insertBefore(addBtn, form)
 }
 
 
