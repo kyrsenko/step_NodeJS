@@ -279,7 +279,7 @@ function changeFields(id) {
         <input type="checkbox" class="status-check" aria-label="Checkbox for following text input" ${status}>
         </div>
     </div>
-    <input type="text" class="form-control" placeholder="text" aria-label="Text input with checkbox" name="todo-text" value=${item.innerText}>
+    <input type="text" class="form-control" placeholder="text" aria-label="Text input with checkbox" name="todo-text" value="${item.innerText}">
     <div class="input-group-append">
         <button class="btn btn-outline-secondary field-delete" type="button"></button>
         `
@@ -311,7 +311,7 @@ function replaceFieldsNote(id) {
     editNoteForm.innerHTML = `<div class="form-group">
     <button style="top:5px; right:5px;" type="button" class="close note-delete-btn field-delete d-block p-2 position-absolute" aria-label="Close" data-id=${id}></button>
             <label for="InputTitle">Title</label>
-            <input name="note-title" type="text" class="form-control" id="InputTitle" placeholder="Enter title" value=${title.innerText}>
+            <input name="note-title" type="text" class="form-control" id="InputTitle" placeholder="Enter title" value="${title.innerText}">
         </div>
         <div class="form-group">
             <label for="FormControlTextarea">text</label>
