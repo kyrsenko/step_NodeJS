@@ -21,7 +21,7 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, 'static')))
 app.use(expressLayouts)
 app.use(indexRoutes)
-app.use(listsRoutes);
+app.use(listsRoutes)
 app.use(noteRoutes);
 
 
