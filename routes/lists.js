@@ -32,11 +32,9 @@ router.post('/api/lists', async (req, res)=>{
             title: req.body.title,
             text: req.body.text
         })
-        console.log(list);
 
         await list.save()
 
-        console.log(req.body);
     } catch (error) {
         console.log(error);
     }

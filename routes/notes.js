@@ -9,13 +9,11 @@ router.get('/notes', async (req, res)=>{
 })
 
 router.post('/api/notes', async (req, res) => {
-    console.log(req.body)
     try {
         const note = await new Note({
             title: req.body.title,
             text: req.body.text
         })
-        console.log(note)
         await note.save()
         console.log('created')
     } catch (error) {
@@ -27,7 +25,6 @@ router.get('/notes/:id', async (req, res) => {
     try {
          let note
          const notes = await Note.find({_id:req.params.id})
-         console.log(notes)
     notes.forEach(item=> {
         note = item
     })
@@ -41,7 +38,6 @@ router.get('/notes/:id', async (req, res) => {
 })
 
 router.delete('/api/notes/:id', async (req, res) => {
-    console.log(req.body)
     try {
         await Note.findOneAndDelete({
             _id: req.body.id
