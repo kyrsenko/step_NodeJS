@@ -11,52 +11,37 @@ router.get('/lists', (req, res)=>{
 router.get('/lists/:id', async (req, res)=>{
     try {
 
-       let list = await TODO.find({
+        let list
+        let lists = await TODO.find({
            _id: req.params.id
         })
 
-        list.forEach(item => list = item)
+        list = lists[0]
 
     res.render('list', {
         pageTitle: "list",
         list
     })
     } catch (error) {
-        console.log(error);
+        const status = !error
+        res.json({created: status})
     }
 })
 
 router.post('/api/lists', async (req, res)=>{
-    try {
+
         const list = await new TODO({
             title: req.body.title,
             text: req.body.text
         })
+        
 
-        await list.save()
-
-    } catch (error) {
-        console.log(error);
-    }
-})
-
-router.get('/lists/:id', async (req, res)=>{
-    try {
-
-       let list = await TODO.find({
-           _id: req.params.id
+        await list.save((error) => {
+            const status = !error
+            res.json({created: status})
         })
-
-        list.forEach(item => list = item)
-
-    res.render('list', {
-        pageTitle: "list",
-        list
-    })
-    } catch (error) {
-        console.log(error);
-    }
 })
+
 
 router.put('/api/lists/:id', async (req, res)=>{
     try {
@@ -69,9 +54,10 @@ router.put('/api/lists/:id', async (req, res)=>{
          }
          )
 
-         console.log("updated");
+         res.send(`${req.params.id} list was updated`)
      } catch (error) {
-         console.log(error);
+        const status = !error
+        res.json({created: status})
      }
      })
 
@@ -80,10 +66,10 @@ router.delete('/api/lists/:id', async (req, res)=>{
         await TODO.findOneAndDelete({
             _id: req.params.id
          })
-
-         console.log("deleted");
+         res.send(`${req.params.id} list was deleted`)
      } catch (error) {
-         console.log(error);
+        const status = !error
+        res.json({created: status})
      }
 })
 

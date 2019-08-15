@@ -9,30 +9,31 @@ router.get('/notes', async (req, res)=>{
 })
 
 router.post('/api/notes', async (req, res) => {
-    try {
         const note = await new Note({
             title: req.body.title,
             text: req.body.text
         })
-        await note.save()
-        console.log('created')
-    } catch (error) {
-        console.log(error)
-    }
+        await note.save((error) => {
+            const status = !error
+            res.json({created: status})
+            console.log('created')
+        })
 })
 
 router.get('/notes/:id', async (req, res) => {
     try {
          let note
          const notes = await Note.find({_id:req.params.id})
-    notes.forEach(item=> {
-        note = item
-    })
-    res.render('note', {
+
+        note = notes[0]
+
+        res.render('note', {
         pageTitle: 'note',
         note
-    })
+        })
     } catch (error) {
+        console.log(error)
+        res.json({created: status})
         console.log(error)
     }
 })
@@ -42,9 +43,12 @@ router.delete('/api/notes/:id', async (req, res) => {
         await Note.findOneAndDelete({
             _id: req.body.id
         })
-        console.log('deleted')
+
+        res.send(`${req.body.id} note was deleted`)
     } catch (error) {
-        console.log(error)
+        const status = !error
+        res.json({created: status})
+
     }
 })
 
@@ -56,9 +60,12 @@ router.put('/api/notes/:id', async (req, res) => {
             title: req.body.title,
             text: req.body.text
         })
-        console.log('edited')
+
+        res.send(`${req.params.id} note was updated`)
     } catch (error) {
-        console.log(error)
+        const status = !error
+        res.json({created: status})
+
     }
 })
 
