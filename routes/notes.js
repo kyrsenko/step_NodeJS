@@ -8,6 +8,7 @@ router.get("/notes", async (req, res) => {
   });
 });
 
+
 router.post("/api/notes", async (req, res) => {
   try {
     const note = await new Note({

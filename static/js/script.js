@@ -1,3 +1,4 @@
+
 document.body.addEventListener("click", async e => {
   const id = e.target.dataset.id;
   if (e.target.classList.contains("add-field")) {
@@ -143,7 +144,7 @@ async function editList(id) {
       document.body.appendChild(addSpinner());
       setTimeout(() => {
         window.location.href = `/lists/${id}`;
-      }, 500);
+      }, 500);    
     }
   } catch (error) {
     console.log(error);
@@ -151,6 +152,7 @@ async function editList(id) {
 }
 
 async function deleteList(id) {
+
   try {
     const data = {
       id: id
@@ -359,3 +361,4 @@ function addSpinner() {
   spinnerWrapper.innerHTML = spinner;
   return spinnerWrapper;
 }
+
