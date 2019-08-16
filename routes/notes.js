@@ -21,6 +21,9 @@ router.post("/api/notes", async (req, res) => {
       created: true
     });
   } catch (error) {
+    await res.json({
+      created: false
+    })
     console.log(error);
   }
 });
@@ -47,6 +50,9 @@ router.delete("/api/notes/:id", async (req, res) => {
     });
     console.log("deleted");
   } catch (error) {
+    await res.json({
+      deleted: false
+    })
     console.log(error);
   }
 });
@@ -67,6 +73,9 @@ router.put("/api/notes/:id", async (req, res) => {
     });
     console.log("edited");
   } catch (error) {
+    await res.json({
+      edited: false
+    })
     console.log(error);
   }
 });
