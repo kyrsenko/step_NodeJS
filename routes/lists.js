@@ -36,6 +36,9 @@ router.post("/api/lists", async (req, res) => {
       created: true
     });
   } catch (error) {
+    await res.json({
+      created: false
+    })
     console.log(error);
   }
 });
@@ -51,12 +54,14 @@ router.put("/api/lists/:id", async (req, res) => {
         text: req.body.text
       }
     );
-    res.json({
+    await res.json({
       edited: true
-    });
+    }); 
 
-    console.log("updated");
   } catch (error) {
+    await res.json({
+      edited: false
+    })
     console.log(error);
   }
 });
@@ -66,12 +71,14 @@ router.delete("/api/lists/:id", async (req, res) => {
     await TODO.findOneAndDelete({
       _id: req.params.id
     });
-
-    console.log("deleted");
     res.json({
       deleted: true
     });
+
   } catch (error) {
+    await res.json({
+      deleted: false
+    })
     console.log(error);
   }
 });

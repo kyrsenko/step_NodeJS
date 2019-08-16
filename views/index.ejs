@@ -3,7 +3,7 @@
     <h2 class="text-center col-12">TODO</h2>
     <%}%>
         <% lists.forEach(item =>{%>
-    <div class="card my-1 p-1  col-12 col-md-6 ">
+    <div class="card border-0 my-1 p-1  col-12 col-md-6 ">
         <div class="border border-dark">
             <%if(item.title){%>
             <h3 class="card-title text-truncate text-center"><%= item.title%></h3>
@@ -26,7 +26,7 @@
     <h2 class="text-center col-12">Notes</h2>
     <%}%>
         <% notes.forEach(item => {%>
-    <div class="card my-1 p-1 col-12 col-md-6">
+    <div class="card border-0 my-1 p-1 col-12 col-md-6">
         <div class="card-body border border-dark">
             <% if(item.title){%>
             <h5 class="card-title text-center"><%= item.title%></h5>
