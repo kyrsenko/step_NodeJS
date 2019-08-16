@@ -1,91 +1,97 @@
-const Router = require('express')
-const router = Router()
-const TODO = require('../models/list')
+const Router = require("express");
+const router = Router();
+const TODO = require("../models/list");
 
-router.get('/lists', (req, res)=>{
-    res.render('lists', {
-        pageTitle: "lists"
-    })
-})
+router.get("/lists", (req, res) => {
+  res.render("lists", {
+    pageTitle: "lists"
+  });
+});
 
-router.get('/lists/:id', async (req, res)=>{
-    try {
+router.get("/lists/:id", async (req, res) => {
+  try {
+    let list = await TODO.find({
+      _id: req.params.id
+    });
 
-       let list = await TODO.find({
-           _id: req.params.id
-        })
+    list.forEach(item => (list = item));
 
-        list.forEach(item => list = item)
+    res.render("list", {
+      pageTitle: "list",
+      list
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-    res.render('list', {
-        pageTitle: "list",
-        list
-    })
-    } catch (error) {
-        console.log(error);
-    }
-})
+router.post("/api/lists", async (req, res) => {
+  try {
+    const list = await new TODO({
+      title: req.body.title,
+      text: req.body.text
+    });
 
-router.post('/api/lists', async (req, res)=>{
-    try {
-        const list = await new TODO({
-            title: req.body.title,
-            text: req.body.text
-        })
+    await list.save();
+  } catch (error) {
+    console.log(error);
+  }
+  res.json({
+    created: true
+  });
+});
 
-        await list.save()
+router.get("/lists/:id", async (req, res) => {
+  try {
+    let list = await TODO.find({
+      _id: req.params.id
+    });
 
-    } catch (error) {
-        console.log(error);
-    }
-})
+    list.forEach(item => (list = item));
 
-router.get('/lists/:id', async (req, res)=>{
-    try {
+    res.render("list", {
+      pageTitle: "list",
+      list
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-       let list = await TODO.find({
-           _id: req.params.id
-        })
+router.put("/api/lists/:id", async (req, res) => {
+  try {
+    await TODO.findOneAndUpdate(
+      {
+        _id: req.params.id
+      },
+      {
+        title: req.body.title,
+        text: req.body.text
+      }
+    );
 
-        list.forEach(item => list = item)
+    console.log("updated");
+  } catch (error) {
+    console.log(error);
+  }
+  res.json({
+    edited: true
+  });
+});
 
-    res.render('list', {
-        pageTitle: "list",
-        list
-    })
-    } catch (error) {
-        console.log(error);
-    }
-})
+router.delete("/api/lists/:id", async (req, res) => {
+  try {
+    await TODO.findOneAndDelete({
+      _id: req.params.id
+    });
 
-router.put('/api/lists/:id', async (req, res)=>{
-    try {
-        await TODO.findOneAndUpdate({
-            _id: req.params.id
-         },
-         {
-             title: req.body.title,
-             text: req.body.text
-         }
-         )
+    console.log("deleted");
+  } catch (error) {
+    console.log(error);
+  }
+  res.json({
+    deleted: true
+  });
+});
 
-         console.log("updated");
-     } catch (error) {
-         console.log(error);
-     }
-     })
-
-router.delete('/api/lists/:id', async (req, res)=>{
-    try {
-        await TODO.findOneAndDelete({
-            _id: req.params.id
-         })
-
-         console.log("deleted");
-     } catch (error) {
-         console.log(error);
-     }
-})
-
-
-module.exports = router
+module.exports = router;
