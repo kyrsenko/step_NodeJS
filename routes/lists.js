@@ -33,12 +33,12 @@ router.post("/api/lists", async (req, res) => {
     });
 
     await list.save();
+    res.json({
+      created: true
+    });
   } catch (error) {
     console.log(error);
   }
-  res.json({
-    created: true
-  });
 });
 
 router.get("/lists/:id", async (req, res) => {
@@ -69,14 +69,14 @@ router.put("/api/lists/:id", async (req, res) => {
         text: req.body.text
       }
     );
+    res.json({
+      edited: true
+    });
 
     console.log("updated");
   } catch (error) {
     console.log(error);
   }
-  res.json({
-    edited: true
-  });
 });
 
 router.delete("/api/lists/:id", async (req, res) => {
@@ -86,12 +86,12 @@ router.delete("/api/lists/:id", async (req, res) => {
     });
 
     console.log("deleted");
+    res.json({
+      deleted: true
+    });
   } catch (error) {
     console.log(error);
   }
-  res.json({
-    deleted: true
-  });
 });
 
 module.exports = router;

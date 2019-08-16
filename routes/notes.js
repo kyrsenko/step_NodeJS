@@ -16,12 +16,12 @@ router.post("/api/notes", async (req, res) => {
     });
     await note.save();
     console.log("created");
+    res.json({
+      created: true
+    });
   } catch (error) {
     console.log(error);
   }
-  res.json({
-    created: true
-  });
 });
 
 router.get("/notes/:id", async (req, res) => {
@@ -45,13 +45,13 @@ router.delete("/api/notes/:id", async (req, res) => {
     await Note.findOneAndDelete({
       _id: req.body.id
     });
+    res.json({
+      deleted: true
+    });
     console.log("deleted");
   } catch (error) {
     console.log(error);
   }
-  res.json({
-    deleted: true
-  });
 });
 
 router.put("/api/notes/:id", async (req, res) => {
@@ -65,13 +65,13 @@ router.put("/api/notes/:id", async (req, res) => {
         text: req.body.text
       }
     );
+    res.json({
+      edited: true
+    });
     console.log("edited");
   } catch (error) {
     console.log(error);
   }
-  res.json({
-    edited: true
-  });
 });
 
 module.exports = router;
