@@ -107,9 +107,8 @@ async function createList() {
       setTimeout(() => {
         window.location.href = "/";
       }, 500);
-    } else if(answer.created === false) {
-      alert('Something wrong!')
-    }
+    } else alert('Something wrong!')
+   
   } catch (error) {
     console.log(error);
   }
@@ -148,9 +147,7 @@ async function editList(id) {
       setTimeout(() => {
         window.location.href = `/lists/${id}`;
       }, 500);    
-    } else if(answer.edited === false) {
-      alert('Something wrong!')
-    }
+    } else alert('Something wrong!')
   } catch (error) {
     console.log(error);
   }
@@ -175,10 +172,7 @@ async function deleteList(id) {
       setTimeout(() => {
         window.location.href = `/`;
       }, 500);
-    }
-    else if(answer.deleted === false) {
-      alert('Something wrong!')
-    }
+    } else alert('Something wrong!')
   } catch (error) {
     console.log(error);
   }
@@ -205,9 +199,7 @@ async function createNote() {
       setTimeout(() => {
         window.location.href = `/`;
       }, 500);
-    }  else if(answer.created === false) {
-      alert('Something wrong!')
-    }
+    } else alert('Something wrong!')
   } catch (error) {
     console.log(error);
   }
@@ -231,9 +223,7 @@ async function deleteNote(id) {
       setTimeout(() => {
         window.location.href = `/`;
       }, 500);
-    } else if(answer.deleted === false) {
-      alert('Something wrong!')
-    }
+    } else alert('Something wrong!')
   } catch (error) {
     console.log(error);
   }
@@ -261,9 +251,7 @@ async function editNote(id) {
       setTimeout(() => {
         window.location.href = `/notes/${id}`;
       }, 500);
-    } else if(answer.edited === false) {
-      alert('Something wrong!')
-    }
+    } else alert('Something wrong!')
   } catch (error) {
     console.log(error);
   }
