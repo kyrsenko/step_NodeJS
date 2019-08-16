@@ -10,11 +10,9 @@ router.get("/lists", (req, res) => {
 
 router.get("/lists/:id", async (req, res) => {
   try {
-    let list = await TODO.find({
+    const list = await TODO.find({
       _id: req.params.id
     });
-
-    list.forEach(item => (list = item));
 
     res.render("list", {
       pageTitle: "list",
@@ -35,23 +33,6 @@ router.post("/api/lists", async (req, res) => {
     await list.save();
     res.json({
       created: true
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-router.get("/lists/:id", async (req, res) => {
-  try {
-    let list = await TODO.find({
-      _id: req.params.id
-    });
-
-    list.forEach(item => (list = item));
-
-    res.render("list", {
-      pageTitle: "list",
-      list
     });
   } catch (error) {
     console.log(error);

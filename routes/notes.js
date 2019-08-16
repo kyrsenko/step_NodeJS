@@ -26,11 +26,7 @@ router.post("/api/notes", async (req, res) => {
 
 router.get("/notes/:id", async (req, res) => {
   try {
-    let note;
-    const notes = await Note.find({ _id: req.params.id });
-    notes.forEach(item => {
-      note = item;
-    });
+    const note = await Note.find({ _id: req.params.id });
     res.render("note", {
       pageTitle: "note",
       note
