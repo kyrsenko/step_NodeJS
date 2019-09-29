@@ -1,12 +1,12 @@
 # step_NodeJS
 
-### Состав участников проекта
+### Project team
 
-* Сеничак Назар(студент №2)
-* Богатов Иван(студент №3)
-* Кирсенко Алексей(студент №1)
+* Senychak Nazar(student №2)
+* Bohatov Ivan(student №3)
+* Kyrsenko Oleksii(student №1)
 
-### Список использованных технологий
+### List of used technologies
 
 * ejs
 * express
@@ -16,6 +16,5 @@
 * nodemon
 * eslint
 
-###### Ссылка на сайт проекта
-
+###### Link on project page
 [TO-DO](https://damp-ravine-42338.herokuapp.com/)
