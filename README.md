@@ -9,13 +9,13 @@
 * Bohatov Ivan(student №3)
 * Kyrsenko Oleksii(student №1)
 
-### List of used technologies
-
-* ejs
+### Used:
+* Node.js
 * express
+* ejs
 * express-ejs-layouts
 * mongoose
 * bootstrap 4
-* nodemon
+
 
 
