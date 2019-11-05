@@ -1,5 +1,8 @@
 # step_NodeJS
 
+###### View on heroku
+[TO-DO](https://notes-todos.herokuapp.com/)
+
 ### Project team
 
 * Senychak Nazar(student №2)
@@ -14,7 +17,5 @@
 * mongoose
 * bootstrap 4
 * nodemon
-* eslint
 
-###### View on heroku
-[TO-DO](https://notes-todos.herokuapp.com/)
+
