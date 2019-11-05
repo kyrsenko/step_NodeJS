@@ -16,5 +16,5 @@
 * nodemon
 * eslint
 
-###### Link on project page
-[TO-DO](https://damp-ravine-42338.herokuapp.com/)
+###### View on heroku
+[TO-DO](https://notes-todos.herokuapp.com/)
